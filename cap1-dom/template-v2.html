@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<body>
+  <div id="app">
+    <!-- OBS1: Com o Vue.js é possível ter acessos diretos às propriedades dentro da instância do Vue.js,
+      sem a necessidade de armazenar essa instância numa variável ou mesmo ter que utilizar as propriedades
+      de uma instância do Vue, como "data.titulo"  "methods.saudacao()".
+    -->
+    
+    <!--OBS2: Tudo o que é interpolado dentro de um template (no caso, da div com id="app") deve sempre 
+      retornar uma string ou converter um valor para uma string, já que HTML é o tipo de arquivo textual que 
+      é interpretado pelo browser.
+    -->
+
+    <!-- Interpolando os dados vindos da função construtora responsável por instanciar o Vue.js -->
+    <p>{{titulo}}</p>
+    <p>{{saudacao()}}</p>
+  </div>
+  
+  <script>
+    new Vue({
+      // Elemento com id
+      el: '#app',
+      
+      data: {
+        titulo: 'Usando VueJS!'
+      },
+
+      methods:{
+        saudacao: function(){
+          return 'Boa noite!'
+        }
+      }
+    })
+  </script>  
+</body>
+</html>
+
+
+
