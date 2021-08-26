@@ -10,9 +10,6 @@ new Vue({
   methods: {
     gerarNumAleatorio: function(){
       return Math.random()
-    },
-    changeInputText: function(event){
-      this.nome = event.target.value
-    }
+    }    
   }
 })
