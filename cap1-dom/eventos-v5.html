@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <p>{{contador}} - Evento: {{evento}}</p>
+
+      <!-- Evento de click com passagem de parâmetros -->
+      <!-- Quando passar algum parâmetro no método que disparar algum evento, o parâmetro event não é mais passado
+           por padrão. Dessa forma, é preciso passar o parâmetro $event que é a palavra reservada de event do Vue -->
+      <button v-on:click="somar(5, $event)">Somar</button>
+
+      <!-- Evento de mouse move -->
+      <p v-on:mousemove="atualizarXY">Mouse {{x}} {{y}}
+        <!-- 2 formas de parar a propagação do evento: -->
+          <!-- 1- Chamando a função onde a variável event irá chamar a função stopPropagation()-->
+          <span v-on:mousemove="pararEvento">PARAR AQUI!!!!</span>
+
+          <!-- 2- Utilizando o modificador de evento 'stop'-->
+          <!-- <span v-on:mousemove.stop="">PARAR AQUI!!!!</span> -->
+      </p>
+
+      <!-- Para eventos de click, para parar o evento, tem 3 formas: -->
+        <!-- 1 - Chamar o preventDefault() do event dentro da função a ser chamada -->
+          <a v-on:click="pararEvento" href="https://www.google.com">Google</a>
+      
+        <!-- 2 - Utilizar o modificador 'prevent' responsável por prevenir o comportamento padrão de uma tag do HTML -->
+        <!-- <a v-on:click.prevent="" href="https://www.google.com">Google</a> -->
+        
+        <!-- 3 - Utilizar o modificador 'stop.prevent' que faz a mesma coisa conforme o item 2-->
+          <!-- <a v-on:click.stop.prevent="" href="https://www.google.com">Google</a> -->
+
+          <hr>
+          <!-- Eventos do teclado -->
+          <!-- <input type="text" v-on:keyup="exibirAlerta"> -->
+
+          <!-- Quando pressionadas as teclas ENTER e ESC juntas, o evento é disparado -->
+          <input type="text" v-on:keyup.enter.esc="exibirAlerta">
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+
+        data: {
+          contador: 0,
+          x: 0,
+          y: 0,
+          evento: ''          
+        },
+
+        methods: {
+          somar: function(passo, event){
+            this.contador += passo
+            this.evento = event.type
+          },
+          atualizarXY: function(event){
+            this.x = event.clientX;
+            this.y = event.clientY;
+          },
+          pararEvento: function(event){
+            if(event.type !== 'click'){
+              event.stopPropagation()
+            }
+            else{              
+              event.preventDefault()
+            }
+          },
+          exibirAlerta(event){            
+            alert(`A tecla pressionada foi ${event.key}.`)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
