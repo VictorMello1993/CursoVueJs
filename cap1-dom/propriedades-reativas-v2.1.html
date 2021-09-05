@@ -1,0 +1,38 @@
+<!-- Entendendo as propriedades computadas -->
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <input type="text" v-model="nome">
+  <input type="text" v-model="nome2">
+  <input type="text" v-model="sobrenome">
+  <p>{{nomeCompleto()}}</p>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+
+    data: {
+      nome: '',
+      nome2: '',
+      sobrenome: ''
+    },
+
+    /* Propriedade computada: Ela é utilizada para evitar processamentos desnecessários que gerem alterações nos
+       valores das propriedades 'data' da instância da Vue que são provenientes de chamadas de outros métodos que não 
+       têm nada a ver com a mudança de valor dessas propriedades. A função só é chamada quando o Vue monitorar
+       quais valores da propriedade 'data' foram alteradas dentro dessa função*/
+    computed: {
+      // nomeCompleto: function(){
+      //   console.log('Método computed resultado chamado...')
+      //   return this.nome + ' ' + this.sobrenome
+      // },
+    },
+
+    methods: {
+      nomeCompleto: function(){
+        return this.nome + ' ' + this.sobrenome
+      }
+    }
+  });
+</script>

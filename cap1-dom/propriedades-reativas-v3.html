@@ -1,0 +1,57 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <button v-on:click="aumentar">Aumentar</button>
+  <button v-on:click="contador2++">Aumentar 2</button>
+  <button v-on:click="diminuir">Diminuir</button>
+  <p>Contador: {{contador}} | {{contador2}}</p>
+  <p>Resultado: {{resultado}}</p>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+
+    data: {
+      contador: 0,
+      contador2: 0,
+    },
+    
+    computed: {
+      resultado: function () {
+        console.log("Método computed resultado chamado...");
+        return this.contador >= 5 ? "Maior que 5" : "Menor que 5";
+      },
+    },
+
+    // As propriedades computadas são síncronas. Logo, uma vez feita uma alteração, obrigatoriamente precisa retornar o valor atualizado
+    // Já as propriedades definidas no watch permitem operações assíncronas que permitem monitorar as alterções nas propriedades definidas no 'data' e no 'computed'
+    // OBS: é preciso que seja uma função que tenha o mesmo nome da propriedade definida no 'data' e no 'computed'
+    watch: {
+      contador(novo, antigo){
+        console.log(`Contador: Valor antigo: ${antigo} | Valor novo: ${novo}`)        
+      },
+      contador2(novo, antigo){
+        console.log(`Contador 2: Valor antigo: ${antigo} | Valor novo: ${novo}`)
+      }
+    },
+
+    methods: {
+      /* Por padrão, a função resultado() será chamada toda vez que algum dado da instância do Vue muda, conforme o
+       evento disparado na variável contador2, o que não é ideal. Para isso, utiliza-se a propriedade computada*/
+
+      // resultado: function(){
+      //   console.log('Método resultado chamado...')
+      //   return this.contador >= 5 ? 'Maior que 5' : 'Menor que 5'
+      // },
+
+      aumentar: function () {
+        this.contador++;
+      },
+
+      diminuir: function () {
+        this.contador--;
+      },
+    },
+  });
+</script>
