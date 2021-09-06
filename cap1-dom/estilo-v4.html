@@ -1,0 +1,82 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<style>
+  .caixas {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .demo {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+  }
+
+  .c1 {
+    background-color: red;
+  }
+
+  .c2 {
+    background-color: blue;
+  }
+
+  .c3 {
+    background-color: green;
+  }
+
+  .girar{
+    transform: rotate(45deg);
+  }
+</style>
+
+<div id="app">
+  <div class="caixas">
+    <!-- Aplicando estilos dinâmicos sem utilizar classes, mas sim a propriedade style -->
+    <!-- <div class="demo" :style="{'background-color': 'red'}"></div>
+    <div class="demo" :style="{'background-color': 'blue'}"></div>    
+    <div class="demo" :style="{'background-color': 'green'}"></div> -->
+    
+    <!-- Ou -->
+
+    <!-- Utilizando a proprieade setada no 'data' -->
+    <!-- <div class="demo" :style="{'background-color': cor}"></div>
+    <div class="demo" :style="{'background-color': cor}"></div>    
+    <div class="demo" :style="{'background-color': cor}"></div> -->
+
+    <!-- Ou -->
+    
+    <div class="demo" :style="{backgroundColor: cor}"></div>
+
+    <!-- Utilizando propriedades computadas (no caso, o método meuEstilo()) -->
+    <!-- <div class="demo" :style="meuEstilo"></div>     -->
+
+    <!-- Também é possível utilizar a notação de array para aplicar vários estilos -->
+    <div class="demo" :style="[meuEstilo, {'height': altura}]"></div>    
+    
+    <div class="demo"></div>
+  </div>
+
+  <hr>
+  <input type="text" v-model="cor">
+  <input type="text" v-model="largura">
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+
+    data: {
+      cor: 'red',
+      largura: 100,
+      altura: 20
+    },
+    
+    computed: {     
+      meuEstilo(){
+        return {
+          backgroundColor: this.cor,
+          width: `${this.largura}px`
+        }
+      }
+    }
+  });
+</script>
