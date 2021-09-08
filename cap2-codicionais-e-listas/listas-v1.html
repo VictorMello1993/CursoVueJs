@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <ul>
+    <!-- Renderizando dinamicamente uma lista com diretiva v-for para percorrer cada item de uma lista -->
+    <li v-for="cor in cores" :teste="cor">{{cor}}</li>
+  </ul>  
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      cores: ['vermelho', 'verde', 'amarelo', 'azul'],
+      pessoas: [
+        {nome: 'Victor', idade: 27, peso: 60},
+        {nome: 'Ana', idade: 30, peso: 57},
+        {nome: 'Vanderson', idade: 34, peso: 87},
+      ]
+    }
+  })
+</script>

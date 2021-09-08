@@ -1,0 +1,75 @@
+<meta charset="UTF-8" />
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <ul class="cores">  
+    <!-- Caso haja alteração na lista (ordem, por exemplo), é preciso que o Vue consiga rastrear
+        essas mudanças. Isso é feito utilizando 'key', para servir de dica de qual a chave que é preciso 
+      referenciar a identidade de um elemento de uma lista -->
+    <li v-for="(cor, i) in cores" :key="cor">{{i + 1}}) {{cor}}</li>
+  </ul>
+  <button @click="cores.push('branco')">Adicionar</button>
+  <hr />
+  <!-- Renderizando dinamicamente uma lista com diretiva v-for para percorrer cada item de uma lista e 
+         com template, sem adicionar uma tag que envolva as tags filhas. -->
+  <template v-for="(cor, i) in cores">
+    <h1>{{cor}}</h1>
+    <p>{{i}}</p>
+  </template>
+
+  <hr />
+  <!-- Neste caso, está adicionando uma div para cada elemento iterado. -->
+  <div v-for="(cor, i) in cores">
+    <h1>{{cor}}</h1>
+    <p>{{i}}</p>
+  </div>
+
+  <hr />
+
+  <!-- Percorrendo objetos - Acessando atributos de objetos -->
+  <!-- <ul>
+    <li v-for="(pessoa, i) in pessoas">{{i + 1}}) {{pessoa.nome}}</li>
+  </ul> -->
+
+  <ul class="pessoas">
+    <li v-for="pessoa in pessoas">
+      <!-- Acessando chave e valor de cada objeto percorrido -->
+      <!-- Cada div irá renderizar o valor, a chave e indíce, sempre nessa ordem -->
+      <div v-for="(valor, chave, indice) in pessoa">
+        {{chave}} = {{valor}} ({{indice}})
+      </div>
+      <br />
+    </li>
+  </ul>
+
+  <hr />
+
+  <!-- Irá imprimir uma lista de números 10 vezes. O Vue inicia a iteração de um elemento numérico a partir do 1. -->
+  <span v-for="n in 10">{{n}} </span>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      cores: ["vermelho", "verde", "amarelo", "azul"],
+      pessoas: [
+        { nome: "Victor", idade: 27, peso: 60 },
+        { nome: "Ana", idade: 30, peso: 57 },
+        { nome: "Vanderson", idade: 34, peso: 87 },
+      ],
+    },
+  });
+</script>
+
+<style>
+  .cores {
+    list-style: none;
+  }
+
+  h1,
+  p {
+    display: inline;
+    margin-left: 10px;
+  }
+</style>
