@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <!-- A tag template é o recurso do HTML 5 que permite renderizações condicionais sem adicionar nenhuma tag que 
+    envolva as tags filhas -->
+  <template v-if="logado">
+    <p>Usuário logado: {{nome}}</p>
+    <p>Perfil: admin</p>
+  </template>
+
+<!-- OBS: aplicando a diretiva v-if faz com que o outro elemento HTML seja removido da DOM se a expressão lógica
+          do v-if for false -->
+
+  <p v-else-if="anonimo">Logado como usuário anônimo</p>
+  <p v-else>Nenhum usuário logado</p>
+
+  <button @click="logado = !logado">{{logado ? 'Sair' : 'Entrar'}}</button>
+  <input type="checkbox" v-model="anonimo">
+
+  <!-- v-show trata renderizações condicionais sem remover um elemento HTML da DOM. Ao invés disso, ele aplica
+  'display:none' para ocultá-lo na tela -->
+  <footer v-show="logado">
+    Desenvolvido para você!
+  </footer>
+  <footer v-show="!logado">
+    Desenvolvido para você que é desconhecido!
+  </footer>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      nome: 'Victor',
+      logado: false,
+      anonimo: true
+    }
+  })
+</script>
