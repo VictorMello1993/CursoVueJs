@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app1">
+    {{titulo1}}
+    <button @click="alterar">Alterar</button>
+  </div>
+
+  <div id="app2">
+    {{titulo2}}
+    <button @click="alterar">Alterar</button>
+  </div>
+</body>
+<script>  
+  
+  // Cuidado para alterar os dados de uma instância a partir da outra, pois a aplicação poderá funcionar de um jeito inesperado
+  /* Conforme dito anteriormente, o uso de múltiplas instâncias é adequado em situações quando se tem uma aplicação construída por outros frameworks,
+     principalmente frameworks do lado server-side (Java, PHP, Node, etc) para acessar as instâncias Vue externamente. Já para uma aplicação do zero,
+     quando se tem um framework front-end construído todo em Vue.js, esse tipo de estratégia não é o ideal. Neste caso, utiliza-se componentes*/
+
+//Acessando instâncias Vue externamente     
+  const vm1 = new Vue({
+    el: '#app1',
+
+    data: {
+      titulo1: "teste1" 
+    },
+    
+    methods: {
+      alterar(){
+        vm2.titulo2 += '????' //Instância vm1 alterou o dado da instância vm2
+      }
+    }
+  })
+
+  const vm2 = new Vue({
+    el: '#app2',
+
+    data: {
+      titulo2: "teste2"
+    },
+    methods: {
+       alterar(){
+         vm1.titulo1 += '!!!!!' //Instância vm2 alterou o dado da instância vm1
+       }
+    }
+  })
+</script>
+</html>

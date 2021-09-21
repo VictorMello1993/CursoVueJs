@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app1">
+    {{titulo}} 
+
+    <!-- ERRO! A propriedade 'novoAtributo' não pode ser interpolada, pois ela não se trata de propriedade reativa -->
+    <!-- Porém, ela é definida no momento da renderização da página -->
+    <!-- [Vue warn]: Property or method "novoAtributo" is not defined on the instance but referenced during render. 
+         Make sure that this property is reactive, either in the data option, or for class-based components, by initializing the property. -->
+    {{novoAtributo}} 
+    <button @click="alterar">Alterar</button>
+  </div>  
+</body>
+<script>  
+  const vm = new Vue({
+    el: '#app1',
+
+    data: {
+      titulo: "teste1" 
+    },
+    
+    methods: {
+      alterar(){
+        this.titulo += '!' 
+      }
+    }
+  })
+
+  vm.novoAtributo = 'Teste'
+  console.log(vm.novoAtributo)
+</script>
+</html>
