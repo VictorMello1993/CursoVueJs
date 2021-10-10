@@ -1,0 +1,41 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <h1>{{titulo}}</h1>
+  <button @click="titulo += '#'">Alterar Título</button>
+  <button @click="$destroy()">Destruir</button>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      titulo: 'Ciclo de vida'
+    },
+    beforeCreate(){
+      console.log('Antes de criar instância Vue')
+    },
+    created(){
+      console.log('Criada a instância Vue')
+    },
+    beforeMount(){
+      console.log('Antes de montar o template na DOM')
+    },
+    mounted(){
+      console.log('DOM montada')
+    },
+    beforeUpdate(){
+      console.log('Antes de atualizar os dados na DOM')
+    },
+    updated(){
+      console.log('Atualizado os dados na DOM')
+    },
+    beforeDestroy(){
+      console.log('Antes de destruir a instância Vue')
+    },
+    destroyed(){
+      console.log('Instância Vue destruída')
+    },
+  })
+</script>
