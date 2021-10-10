@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+
+<div id="app">
+  {{nome}} {{idade}} {{1 + 1}} {{10 * 10}}
+</div>
+
+<!-- Implementando uma instância Vue para melhor entendimento como funciona por trás, através do padrão Observer -->
+<script>
+  function MeuVue(params){
+    this.$el = document.querySelector(params.el)
+    this.$data = params.data
+
+    for (let atr in this.$data) {
+      Object.defineProperty(this, atr, {
+        get: () => {
+          return this.$data[atr]
+        },
+
+        set: value => {
+          this.$data[atr] = value
+        }
+      })
+    }
+
+    //Interpolar
+    //$1 => representa a string no qual o regex deu match 
+  const regex = /\{\{([\s\w+*-]*)\}\}/g
+    this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) => {
+      const value = this[$1.trim()]
+      return value ? value : eval($1)
+    })
+  }
+
+
+  const vm = new MeuVue({
+    el: '#app',
+    data: {
+      nome: 'Victor',
+      idade: 27
+    }
+  })
+
+  console.log(vm.nome, vm.idade)
+  console.log(vm.data.nome, vm.data.idade)
+  vm.nome = 'Fulano'
+  console.log(vm.nome)
+  console.log(vm.data.nome)
+</script>

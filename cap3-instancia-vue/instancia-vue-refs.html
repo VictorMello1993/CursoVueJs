@@ -1,0 +1,37 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <!-- Utilizando o atributo ref para utilizar a referência ao elemento da DOM selecionado -->
+  <!-- Poderia utilizar document.querySelector('h1') -->
+  <h1 ref="aulaRef">{{aula}}</h1>
+
+  <h2>{{modulo}}</h2>
+  <button @click="alterarAula">Alterar Aula</button>
+  <button @click="alterarModulo">Alterar Módulo</button>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      aula: 'Aula: Usando refs',
+      modulo: 'Módulo: Instância Vue'
+    },
+    methods: {
+      alterarAula(){
+        this.aula += '#'
+      },
+      alterarModulo(){
+        this.modulo += '#'
+      } 
+    }
+  })
+
+  vm.$refs.aulaRef.innerText = 'Alterado diretamente! =('
+  /*Ao clicar no botão, mesmo que o valor tenha sido alterado diretamente na DOM, usando o refs, não será renderizado
+    com o valor original de forma reativa, apesar do componente estar evoluindo por trás e existir virtual DOM. Isso
+    ocorreu com a nova atualização da linguagem, e antigamente o comportamento era que com o uso do refs, ao clicar no
+    botão, o valor era restaurado com valor original.*/ 
+</script>
+

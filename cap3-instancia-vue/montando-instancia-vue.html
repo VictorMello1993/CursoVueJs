@@ -1,0 +1,62 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+
+<!-- Template a ser renderizado diretamente pelo atributo 'el' da instância Vue (conforme opção 1) -->
+<!-- <div id="app">  
+      <h1>{{aula}}</h1>
+      <h2>{{modulo}}</h2>
+      <button @click="alterarAula">Alterar Aula</button>
+      <button @click="alterarModulo">Alterar Módulo</button>
+    </div> -->
+
+<!-- Template a ser englobado pelos elementos HTML definidos pelo atributo 'template' (conforme a opção 2) e 
+     montado através do método $mount(<div#app>) (conforme a opção 3) -->
+<div id="app"></div>
+
+<script>
+  const vm = new Vue({  
+    //Opção 1 (padrão) - Utilizando o atributo 'el' para definir diretamente o template a ser renderizado pelo Vue
+    //el: '#app' 
+
+    /*Opção 2 - Utilizando o atributo 'template'. É importante observar que no atributo template, só aceita 1 elemento raíz.
+                Dessa forma, é recomendado englobar os elementos internos em uma única div, conforme a linha abaixo:*/        
+    template: `
+    <div>  
+      <h1>{{aula}}</h1>
+      <h2>{{modulo}}</h2>
+      <button @click="alterarAula">Alterar Aula</button>
+      <button @click="alterarModulo">Alterar Módulo</button>
+    </div> `,
+    
+    data: {
+      aula: 'Aula: Montando instância Vue',
+      modulo: 'Módulo: Instância Vue'
+    },
+    methods: {
+      alterarAula(){
+        this.aula += '#'
+      },
+      alterarModulo(){
+        this.modulo += '#'
+      } 
+    }
+  })    
+
+  //Opção 3
+  /*Uma alterativa à  montagem da instância Vue utilizando a definição do template com 'el' pelo atributo 'data', 
+    é utilizar o método mount(<div#app>). O parâmetro a ser passado representa o template a ser renderizado no Vue, 
+    que é o próprio 'el' que é definido por padrão pelo atributo 'data' da instância Vue. Dessa forma, irá montar a 
+    estrutura HTML da div com id #app, e será injetada no template
+  */   
+
+  // vm.$mount('#app')
+
+  /* Opção 4 - Utilizar o $mount() sem referenciar o template. Internamente, será montada a instância Vue com template
+               definido no atributo 'template'. Este componente é o próprio template definido pelo atributo 'el'. 
+               Após isso, os elementos internos que foram definidos no template são injetados com Javascript puro, 
+               conforme o código abaixo:*/ 
+  vm.$mount()
+  document.querySelector('#app').appendChild(vm.$el)
+</script>
+

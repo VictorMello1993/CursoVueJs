@@ -1,0 +1,92 @@
+<!-- Utilizando componentes -->
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">  
+  <comp></comp>
+  <comp></comp>
+  <comp></comp>
+  
+  <!-- Referenciando um componente com a classe-->
+  <!-- <div class="comp"></div>   -->
+</div>
+
+<script>
+  /*CUIDADO! Fazendo dessa forma, cada componente estaria compartilhando
+    o mesmo objeto entre outros componentes, o que faz com que 
+    o estado de um componente seja refletido em outros componentes.*/    
+  // const dados = {
+  //   aula: 'Aula: Montando instância Vue',
+  //   modulo: 'Módulo: Instância Vue'
+  // }
+
+  //Registrando um componente de forma global dentro do Vue
+  Vue.component('comp', {        
+    template: `
+    <div>
+      <h1>{{aula}}</h1>
+      <h2>{{modulo}}</h2>
+      <button @click="alterarAula">Alterar Aula</button>
+      <button @click="alterarModulo">Alterar Módulo</button>
+    </div>`,
+
+    /*Dentro do contexto de componente, o atributo 'data' deverá ser 
+      uma função que retorne um objeto com os dados. Dessa forma,
+      cada componente terá o seu próprio estado porque cada 
+      um retorna referências diferentes de objetos com os dados.
+      No contexto de instância do Vue, o atributo 'data' não precisa
+      ser uma função porque cada instância é um objeto diferente.*/
+    data: function() {
+      return {
+        aula: 'Aula: Montando instância Vue',
+        modulo: 'Módulo: Instância Vue'
+      }
+      // return dados
+    },
+    
+    methods: {
+      alterarAula() {
+        this.aula += '#'
+      },
+      alterarModulo() {
+        this.modulo += '#'
+      }
+    }
+  })
+
+  const vm = new Vue({
+    el: '#app',
+
+    // el: 'comp' , //O componente será o template definido pelo atributo 'template' da instância Vue
+
+    //O componente agora será uma div com a classe .comp    
+    // el: '.comp',
+
+    // template: `
+    // <div>
+    //   <h1>{{aula}}</h1>
+    //   <h2>{{modulo}}</h2>
+    //   <button @click="alterarAula">Alterar Aula</button>
+    //   <button @click="alterarModulo">Alterar Módulo</button>
+    // </div>`,
+
+    // data: {
+    //   aula: 'Aula: Montando instância Vue',
+    //   modulo: 'Módulo: Instância Vue'
+    // },
+    
+    // methods: {
+    //   alterarAula() {
+    //     this.aula += '#'
+    //   },
+    //   alterarModulo() {
+    //     this.modulo += '#'
+    //   }
+    // }
+  })
+
+/*OBS: a instância Vue não é componente! Por isso, toda vez que
+       são definidas várias divs com a mesma classe .comp,
+      só renderiza um único elemento*/     
+</script>
+
