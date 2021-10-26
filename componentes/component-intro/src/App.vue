@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <h1>Contadores</h1>
+  <div id="app">    
     <app-contadores />
     {{ contador }}
   </div>
