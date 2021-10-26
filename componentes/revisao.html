@@ -1,0 +1,65 @@
+<meta charset="utf-8" />
+<script src="https://unpkg.com/vue"></script>
+
+<!-- <div id="app">
+  <span>{{contador}}</span>
+  <button @click="contador++">+</button>
+  <button @click="contador--">-</button>
+</div> -->
+
+<!-- ERRO! O Vue só consegue interpretar um único elemento do template. Solução: Criar um componente -->
+<!-- <div id="app">
+  <span>{{contador}}</span>
+  <button @click="contador++">+</button>
+  <button @click="contador--">-</button>
+</div> -->
+
+<div id="app1">
+  <contador></contador>
+  <contador></contador>
+  <contador></contador>
+</div>
+<hr>
+<div id="app2">
+  <contador></contador>
+  <contador></contador>
+  <contador></contador>
+</div>
+
+<script>
+  const dados = { contador: 0 }
+
+  //Criando um componente de forma global. Portanto, todas as instâncias Vue irão utilizar esse mesmo componente.
+  Vue.component('contador', {
+    template: `
+      <div>
+        <span>{{contador}}</span>
+        <button @click="contador++">+</button>
+        <button @click="contador--">-</button>
+      </div>
+    `,
+    /* Quando se cria um componente, para que cada um possua seu estado, é preciso que o elemento 'data' 
+       seja uma função que retorne um objeto*/
+    data() {
+      // return dados //Erro! Dessa forma, todos os componentes estão compartilhando o mesmo objeto 'dados'
+      return {
+        contador: 0
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app2',
+    data: {
+      contador: 0
+    }
+  })
+
+  new Vue({
+    el: '#app1',
+    data: {
+      contador: 0
+    }
+  })
+  
+</script>
