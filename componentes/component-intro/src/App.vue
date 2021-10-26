@@ -2,6 +2,7 @@
   <div id="app">    
     <app-contadores />
     {{ contador }}
+    <button>?</button>
   </div>
 </template>
 
