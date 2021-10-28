@@ -19,6 +19,10 @@ export default {
       type: String,
     //   required: true,
       default: "Anônimo",
+      //O valor default também pode ser retornado através de funções 
+      // default(){
+      //   return Array(10).fill(5).join(',')
+      // }
     },
   },
 
