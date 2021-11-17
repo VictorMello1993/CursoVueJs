@@ -10,6 +10,9 @@
     <!--Comunicação indireta utilizando callbacks. Foi criada a propriedade reiniciarFn que representa uma
         função de callback para notificar o componente pai que o valor da propriedade 'nome' foi alterado nele.  -->
     <button @click="reiniciarFn()">Reiniciar Nome (Callback)</button> 
+    <p>
+      Idade do usuário: <strong>{{idade}}</strong>
+    </p>
   </div>
 </template>
 
@@ -29,6 +32,7 @@ export default {
       //   return Array(10).fill(5).join(',')
       // }
     },
+    idade: Number,
     reiniciarFn: Function 
   },
 

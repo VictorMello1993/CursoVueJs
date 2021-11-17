@@ -3,6 +3,7 @@
         <h1>Componente Usuário</h1>
         <p>Esse é um componente muito legal!</p>
         <p>Nome é <strong>{{nome}}</strong></p>
+        <p>Idade é <strong>{{idade}}</strong></p>
         <button @click="alterarNome">Alterar nome</button>
         <hr>
         <div class="componentes">
@@ -24,8 +25,8 @@
             para comunicação do componente filho com o componente pai (comunicação indireta) e
             uso de callbacks (no caso, foi criada a propriedade do filho chamada "reiniciarFn", que irá disparar o 
             evento para que o pai seja notificado a mudança na propriedade 'nome')-->
-            <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo" :reiniciarFn="reiniciarNome"/> 
-            <app-usuario-editar />
+            <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo" :reiniciarFn="reiniciarNome" :idade="idade"/> 
+            <app-usuario-editar :idade="idade" @idadeMudou="idade = $event"/>
         </div>
     </div>
 </template>
@@ -38,7 +39,8 @@ export default {
     components: { AppUsuarioInfo, AppUsuarioEditar },
     data() {
         return {
-            nome: 'Victor'
+            nome: 'Victor',
+            idade: 27
         }
     },
 
