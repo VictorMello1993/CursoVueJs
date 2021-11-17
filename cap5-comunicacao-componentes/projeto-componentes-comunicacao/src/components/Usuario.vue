@@ -2,6 +2,7 @@
     <div class="container">
         <h1>Componente Usuário</h1>
         <p>Esse é um componente muito legal!</p>
+        <p>Nome é <strong>{{nome}}</strong></p>
         <button @click="alterarNome">Alterar nome</button>
         <hr>
         <div class="componentes">
@@ -18,7 +19,10 @@
                      as tags sejam case insensitive, no momento de compilar o que foi definido no componente para o 
                      código Javascript, haverá uma diferença entre letras maiúsculas e minúsculas, pois utiliza 
                      o Camel Case na definição de identificadores de variáveis e funções.  -->
-            <app-usuario-info :nome="nome"/>
+
+            <!--Aula 125 - Criando eventos personalizados (no caso, chama-se "nomeMudou") 
+            para comunicação do componente filho com o componente pai (comunicação indireta)  -->
+            <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo"/> 
             <app-usuario-editar />
         </div>
     </div>

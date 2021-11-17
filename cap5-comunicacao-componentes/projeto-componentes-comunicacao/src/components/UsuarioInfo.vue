@@ -5,6 +5,7 @@
     <p>
       Nome do usuário: <strong>{{ inverterNome() }}</strong>
     </p>
+    <button @click="reiniciarNome">Reiniciar nome</button>
   </div>
 </template>
 
@@ -30,6 +31,17 @@ export default {
     inverterNome() {
       return this.nome.split("").reverse().join("");
     },
+    reiniciarNome(){
+      const antigo = this.nome //Valor antigo
+      this.nome = "Victor" //Novo valor
+
+      /*Disparando evento para que o componente pai o escute para monitorar mudanças que ocorrem nas propriedades 
+      do componente filho - Essa é uma das formas de comunição indireta (Relação filho com o pai) - Usando $emit()*/
+
+      /* O segundo parâmetro do $emit pode ser um valor que foi alterado, assim como pode ser um objeto contendo
+      mais informações sobre o evento gerado*/
+      this.$emit('nomeMudou', {novo: this.nome, antigo})
+    }
   },
 
   //CONFLITO! Já existe um atributo que na verdade é uma propriedade 'nome' definido no props
