@@ -20,9 +20,11 @@
                      código Javascript, haverá uma diferença entre letras maiúsculas e minúsculas, pois utiliza 
                      o Camel Case na definição de identificadores de variáveis e funções.  -->
 
-            <!--Aula 125 - Criando eventos personalizados (no caso, chama-se "nomeMudou") 
-            para comunicação do componente filho com o componente pai (comunicação indireta)  -->
-            <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo"/> 
+            <!--Aula 125 e 126 - Criando eventos personalizados (no caso, chama-se "nomeMudou") 
+            para comunicação do componente filho com o componente pai (comunicação indireta) e
+            uso de callbacks (no caso, foi criada a propriedade do filho chamada "reiniciarFn", que irá disparar o 
+            evento para que o pai seja notificado a mudança na propriedade 'nome')-->
+            <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo" :reiniciarFn="reiniciarNome"/> 
             <app-usuario-editar />
         </div>
     </div>
@@ -43,6 +45,9 @@ export default {
     methods: {
         alterarNome(){
             this.nome = 'Pedro'
+        },
+        reiniciarNome(){
+            this.nome = 'Felipe'
         }
     }
 }
