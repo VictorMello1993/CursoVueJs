@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import eventBus from '@/bus.js';
 export default {
   //Recebendo a propriedade 'nome' que foi passada do componente pai (Usuario.vue)
   // props: ['nome'],
@@ -50,8 +51,13 @@ export default {
       /* O segundo parâmetro do $emit pode ser um valor que foi alterado, assim como pode ser um objeto contendo
       mais informações sobre o evento gerado*/
       this.$emit('nomeMudou', {novo: this.nome, antigo})
-    }
+    },    
   },
+  created(){
+      eventBus.$on('idadeMudou', AIdade => {
+        this.idade = AIdade;
+      }) //O componente filho UsuarioInfo.vue "escuta" o evento emitido pelo componente UduarioEditar.vue
+    }
 
   //CONFLITO! Já existe um atributo que na verdade é uma propriedade 'nome' definido no props
   // data(){

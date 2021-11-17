@@ -26,7 +26,11 @@
             uso de callbacks (no caso, foi criada a propriedade do filho chamada "reiniciarFn", que irá disparar o 
             evento para que o pai seja notificado a mudança na propriedade 'nome')-->
             <app-usuario-info :nome="nome" @nomeMudou="nome = $event.novo" :reiniciarFn="reiniciarNome" :idade="idade"/> 
-            <app-usuario-editar :idade="idade" @idadeMudou="idade = $event"/>
+
+            <!-- <app-usuario-editar :idade="idade" @idadeMudou="idade = $event" :reiniciarIdadeFn="reiniciarIdade"/> -->
+
+            <!-- Esse será a tag do componente que se comunicará com o componente UsuarioInfo via event bus -->
+            <app-usuario-editar :idade="idade"/> 
         </div>
     </div>
 </template>
@@ -48,8 +52,15 @@ export default {
         alterarNome(){
             this.nome = 'Pedro'
         },
+
+        // Função invocada pelo callback reiniciarFn registrado no componente UsuarioInfo.vue
         reiniciarNome(){
             this.nome = 'Felipe'
+        },
+
+        // Função invocada pelo callback reiniciarIdadeFn registrado no componente UsuarioEditar.vue
+        reiniciarIdade(){
+            this.idade = 27
         }
     }
 }
