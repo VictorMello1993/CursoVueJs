@@ -11,7 +11,7 @@
         função de callback para notificar o componente pai que o valor da propriedade 'nome' foi alterado nele.  -->
     <button @click="reiniciarFn()">Reiniciar Nome (Callback)</button> 
     <p>
-      Idade do usuário: <strong>{{idade}}</strong>
+      Idade do usuário: <strong>{{novaIdade}}</strong>
     </p>
   </div>
 </template>
@@ -54,9 +54,22 @@ export default {
     },    
   },
   created(){
-      eventBus.$on('idadeMudou', AIdade => {
-        this.idade = AIdade;
-      }) //O componente filho UsuarioInfo.vue "escuta" o evento emitido pelo componente UduarioEditar.vue
+      // eventBus.$on('idadeMudou', AIdade => {
+      //   this.idade = AIdade;
+      // }) //O componente filho UsuarioInfo.vue "escuta" o evento emitido pelo componente UduarioEditar.vue
+
+      // Ou
+
+      //Utilizando método do evento definido no bus.js
+      eventBus.quandoIdadeMudar(AIdade => {
+        this.novaIdade = AIdade;
+      })
+    },
+
+    data(){
+      return {
+        novaIdade: this.idade
+      }
     }
 
   //CONFLITO! Já existe um atributo que na verdade é uma propriedade 'nome' definido no props

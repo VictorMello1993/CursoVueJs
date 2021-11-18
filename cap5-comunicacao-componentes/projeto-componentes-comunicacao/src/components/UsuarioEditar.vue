@@ -2,7 +2,7 @@
     <div class="componente">
         <h2>Alterar os Dados de Usuário</h2>
         <p>Edite as informações</p>
-        <p>Idade do usuário: <strong>{{idade}}</strong></p>
+        <p>Idade do usuário: <strong>{{novaIdade}}</strong></p>
         <button @click="alterarIdade">Alterar idade</button>
         <button @click="reiniciarIdadeFn()">Reiniciar idade (callback)</button>
     </div>
@@ -17,14 +17,27 @@ export default {
     reiniciarIdadeFn: Function
   },
   methods: {
-      alterarIdade(){        
-          this.idade = 33  
-        //   this.$emit('idadeMudou', this.idade) //Emitindo evento para comunicação com o componente pai
+      alterarIdade(){         
+          // Resolvendo o warning emitido no console para tratar as modificações nos valores do props
+          this.novaIdade = this.idade
+          this.novaIdade = 33        
 
-        /* Utilizando Event Bus para emitir eventos para seus irmãos.*/
-          eventBus.$emit('idadeMudou', this.idade)
+        //   this.$emit('idadeMudou', this.novaIdade) //Emitindo evento para comunicação com o componente pai
+
+        //   Utilizando Event Bus para emitir eventos para seus irmãos.
+        //   eventBus.$emit('idadeMudou', this.novaIdade)
+
+        // Ou
+        
+          //Utilizando método do evento definido no bus.js
+          eventBus.alterarIdade(this.novaIdade)
       }
-  }   
+  },
+  data(){
+      return {
+          novaIdade: this.idade
+      }
+  }
 }
 </script>
 
