@@ -26,6 +26,10 @@ export default {
             const usuario = this.usuarios.find(usuario => usuario.id === usuarioId);
 
             busEvent.selecionarUsuario(usuario);
+
+            /*CUIDADO! Passar variáveis por referência (array e objetos) entre componentes 
+            pode gerar um efeito colaterado indesejável. */
+            // this.usuarios.pop();
         }
     }
 }
